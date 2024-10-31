@@ -35,7 +35,9 @@
                                 <a href="" class="btn btn-light btn-sm">
                                   Editar
                                 </a>
-                                <a href="{{ route('produto.delete') }}" class="btn btn-danger btn-sm">
+
+                                <meta name='casr'>
+                                <a onclick="deleteRegistroPaginacao( '{{ route('produto.delete') }} ', {{ $produto->id }} )" class="btn btn-danger btn-sm">
                                   Excluir
                                 </a>  
                             </td>
