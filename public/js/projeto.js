@@ -3,7 +3,7 @@ function deleteRegistroPaginacao(rotaUrl, idDoRegistro) {
         $.ajax({
             url: rotaUrl,
             method: 'DELETE',
-            headers: {},
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: {
                 id: idDoRegistro,
             },
@@ -15,7 +15,12 @@ function deleteRegistroPaginacao(rotaUrl, idDoRegistro) {
             },
         }).done(function (data){
             $.unblockUI();
-            console.log(data);
+            if(data.success == true) {
+                window.location.reload();
+            } else {
+                alert('não foi possível excluir');
+            }
+            
         }).fail(function (data) {
             $.unblockUI();
             alert('Nao foi possivel buscar os dados');

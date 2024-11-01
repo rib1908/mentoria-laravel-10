@@ -12,7 +12,8 @@ class ProdutosController extends Controller
         $this->produto = $produto;    
     }
 
-    public function index (Request $request) {
+    public function index (Request $request) 
+    {
 
         $pesquisar = $request->pesquisar;
         $findProduto = $this->produto->getProdutosPesquisarIndex(search: $pesquisar ?? '');
@@ -20,7 +21,23 @@ class ProdutosController extends Controller
         return view('pages.produtos.paginacao', compact('findProduto'));
     }
     
-    public function delete (Request $request) {
+    public function delete (Request $request) 
+    {
+        
+        $id = $request->id;
+        $buscaRegistro = Produto::find($id);
+        $buscaRegistro->delete();
+
+        return response()->json(['success'=>true]);
 
     }
+    public function cadastarProduto(Request $request) 
+    {
+        if($request->method() == "POST") {
+            // Cria os dados
+        }
+
+        return view('pages.produtos.create');
+    }
 }
+
