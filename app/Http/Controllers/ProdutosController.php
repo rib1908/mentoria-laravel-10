@@ -31,7 +31,7 @@ class ProdutosController extends Controller
         return response()->json(['success'=>true]);
 
     }
-    public function cadastarProduto(Request $request) 
+    public function cadastrarProduto(Request $request) 
     {
         if($request->method() == "POST") {
             // Cria os dados
