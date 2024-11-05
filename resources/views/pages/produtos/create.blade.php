@@ -1,21 +1,25 @@
 @extends('index')
 
 @section('content')
-<form>
-    <form>
+    <form class= "form" method="POST" action="{{ route('cadastrar.produto') }}">
+      @csrf <!-- Tem que passar esse token no laravel para fazer requisição -->
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Criar novo Produto</h1>
+        </div>  
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <label class="form-label">Nome</label>
+          <input type="text" class="form-control @error('nome') is-invalid @enderror"  name="nome">
+          @if ($errors->has('nome'))
+              <div class="invalid-feedback"> {{ $errors->first('nome') }}</div>
+          @endif     
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
+          <label class="form-label">Valor</label>
+          <input id="mascara_valor" class="form-control @error('nome') is-invalid @enderror" name="valor">
+          @if ($errors->has('valor'))
+              <div class="invalid-feedback"> {{ $errors->first('valor') }}</div>
+          @endif
         </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+        <button type="submit" class="btn btn-success">CADASTRAR</button>
+    </form>
 @endsection
