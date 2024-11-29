@@ -23,5 +23,16 @@ class ClientesSeeder extends Seeder
         ]
 
         );
+
+        Cliente::create ( [
+            'nome' => 'Teste Cláudio',
+            'email'=> 'teste@gmail.com',
+            'endereco'=> 'Rua Teste 43',
+            'logradouro'=> 'Rua Teste',
+            'cep'=> '2345430',
+            'bairro'=> 'Centro'
+        ]
+
+        );
     }
 }

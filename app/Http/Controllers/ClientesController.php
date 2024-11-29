@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FormRequestClientes;
 use App\Models\Cliente;
 use App\Models\Componentes;
 use Illuminate\Http\Request;
@@ -32,17 +33,14 @@ class ClientesController extends Controller
         return response()->json(['success'=>true]);
 
     }
-    public function cadastrarCliente(Request $request) 
+    public function cadastrarCliente(FormRequestClientes $request) 
     {
         if($request->method() == "POST") {
             // Cria os dados
             $data = $request->all();
-            $componentes = new Componentes();
-
-            $data['valor'] = $componentes->formatacaoMascaraDinheiroDecimal($data['valor']);
             Cliente::create($data);
 
-            return redirect()->route('cliente.index');
+            return redirect()->route('clientes.index');
         }
 
         return view('pages.clientes.create');
@@ -55,15 +53,15 @@ class ClientesController extends Controller
             // Atualiza os dados
             $data = $request->all();
             $componentes = new Componentes();
-            $data['valor'] = $componentes->formatacaoMascaraDinheiroDecimal($data['valor']);
+            //$data['valor'] = $componentes->formatacaoMascaraDinheiroDecimal($data['valor']);
             $buscaRegistro = Cliente::find($id);
             $buscaRegistro->update($data);
 
-            return redirect()->route('cliente.index');
+            return redirect()->route('clientes.index');
         }
 
         // mostrar os dados
-        $findProduto = Cliente::where('id', '=', $id)-> first();
+        $findCliente = Cliente::where('id', '=', $id)-> first();
         return view('pages.clientes.atualiza', compact('findCliente'));
         
     }
