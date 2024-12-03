@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VendaController;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ClientesController;
 use Illuminate\Support\Facades\Route;
@@ -46,4 +47,11 @@ Route::prefix('clientes')->group(function () {
 
     Route::delete('/delete', [ClientesController::class, 'delete'])->name('cliente.delete');
     
+});
+
+Route::prefix('vendas')->group(function () {
+    Route::get('/', [VendaController::class, 'index'])->name('vendas.index');
+    //Cadastro Create
+    Route::get('/cadastrarVenda', [VendaController::class, 'cadastrarVenda'])->name('cadastrar.venda');
+    Route::post('/cadastrarVenda', [VendaController::class, 'cadastrarVenda'])->name('cadastrar.venda');   
 });

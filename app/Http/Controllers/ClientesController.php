@@ -46,14 +46,12 @@ class ClientesController extends Controller
         return view('pages.clientes.create');
     }
 
-    public function atualizarCliente(Request $request, $id) 
+    public function atualizarCliente(FormRequestClientes $request, $id) 
     {
         if($request->method() == "PUT") {
             
             // Atualiza os dados
             $data = $request->all();
-            $componentes = new Componentes();
-            //$data['valor'] = $componentes->formatacaoMascaraDinheiroDecimal($data['valor']);
             $buscaRegistro = Cliente::find($id);
             $buscaRegistro->update($data);
 
