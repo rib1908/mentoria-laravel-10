@@ -11,7 +11,7 @@ class FormRequestVenda extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,13 @@ class FormRequestVenda extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $request = [];
+        if($this->method() == "POST" || $this->method() == "PUT") {
+            $request = [
+                'produto_id' => 'required',
+                'cliente_id' => 'required'
+            ];
+        }
+        return $request;
     }
 }
