@@ -42,4 +42,12 @@ class VendaController extends Controller
 
         return view('pages.vendas.create', compact('findNumeracao', 'findProduto', 'findCLiente'));
     }
+
+    public function enviaComprovantePorEmail($id) {
+        $buscaVenda = Venda::where('id', '=', $id)->first();
+        $produtoNome = $buscaVenda->produto->nome;
+        $clienteNome = $buscaVenda->cliente->email;
+
+
+    }
 }

@@ -12,17 +12,18 @@ use Illuminate\Queue\SerializesModels;
 class ComprovanteDeVendaEmail extends Mailable
 {
     use Queueable, SerializesModels;
+    public $mailData;
 
-    public function __construct()
+    public function __construct($mailData)
     {
-        //
+        $this->mailData = $mailData;
     }
 
     
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Comprovante De Venda Email',
+            subject: 'Comprovante De Venda',
         );
     }
 
@@ -30,7 +31,7 @@ class ComprovanteDeVendaEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'email.comprovante_venda',
         );
     }
 
