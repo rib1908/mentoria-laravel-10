@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FormRequestVenda;
+use App\Mail\ComprovanteDeVendaEmail;
+use App\Models\Cliente;
+use App\Models\Produto;
 use App\Models\Venda;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class VendaController extends Controller
 {
@@ -46,8 +51,17 @@ class VendaController extends Controller
     public function enviaComprovantePorEmail($id) {
         $buscaVenda = Venda::where('id', '=', $id)->first();
         $produtoNome = $buscaVenda->produto->nome;
-        $clienteNome = $buscaVenda->cliente->email;
+        $clienteEmail = $buscaVenda->cliente->email;
+        $clienteNome = $buscaVenda->cliente->nome;
 
+        $sendMailData = [
+            'produtoNome' => $produtoNome,
+            'clienteNome' => $clienteNome,
+        ];
+
+        Mail::to($clienteEmail)->send(new ComprovanteDeVendaEmail($sendMailData));
+
+        return redirect()->route('vendas.index');
 
     }
 }
