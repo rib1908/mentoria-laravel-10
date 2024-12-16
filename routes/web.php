@@ -4,6 +4,7 @@ use App\Http\Controllers\VendaController;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -61,4 +62,8 @@ Route::prefix('vendas')->group(function () {
     Route::get('/cadastrarVenda', [VendaController::class, 'cadastrarVenda'])->name('cadastrar.venda');
     Route::post('/cadastrarVenda', [VendaController::class, 'cadastrarVenda'])->name('cadastrar.venda');   
     Route::get('/enviaComprovantePorEmail/{id}', [VendaController::class, 'enviaComprovantePorEmail'])->name('enviaComprovantePorEmail.venda');
+});
+
+Route::prefix('usuario')->group(function () {
+    Route::get('/', [UsuarioController::class, 'index'])->name('usuario.index');
 });
